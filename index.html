@@ -1,12 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
     
-</body>
+    
+        <title>All about foods for foodies</title>
+        <!-- link jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- link bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- link css style sheet -->
+        <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"> -->
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 text-center" id="page-header">
+                    <h1>All about foods</h1>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+        <div class="container">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5 text-center" id="search-area">
+                    <div class="form-group">
+                        <label for="topic-input">Enter a food:</label>
+                        <input class="form-control" id="food-input" type="text">
+                    </div>
+                    <button class="btn btn-secondary" id="food-search" type="submit">Ready!!</button>
+                </div>
+                <div class="col-5 text-center" id="recipe-area">
+    
+                    Recipe goes here
+    
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5 text-center" id="nutrition-area">
+                    Nutrition Facts go here
+                </div>
+                <div class="col-5 text-center" id="video-area">
+    
+                    Video goes here
+    
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 text-center" id="results-area">
+                    Recent Search Results go here
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    
+    <script type="text/javascript">
+        $("#food-search").on("click", function() {
+            var food = $("<div>");
+            var queryURL = "https://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
+            // var queryURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
+            $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        .then(function(response) {
+          var results = response.data;
+
+        //   for (var i = 0; i < results.length; i++) {
+        //     var foodDiv = $("#nutrition-area");
+
+        //     var nutrients = results[i].nutrients;
+
+        //     var p = $("<p>").text("Nutrients: " + nutrients);
+
+        //     // var personImage = $("<img>");
+        //     // personImage.attr("src", results[i].images.fixed_height.url);
+
+        //     foodDiv.prepend(p);
+        //     // gifDiv.prepend(personImage);
+
+            // $("#nutrition-area").prepend(foodDiv);
+            console.log(response);
+        // }
+        });
+    });
+        </script>
+    </body>
 </html>
