@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-5 text-center" id="recipe-area">
     
-                    Recipe goes here
+                    
     
                 </div>
                 <div class="col-1"></div>
@@ -70,38 +70,10 @@
                 <div class="col-1"></div>
             </div>
         </div>
-    
-    <script type="text/javascript">
-        $("#food-search").on("click", function() {
-            var food = $("<div>");
-            var queryURL = "https://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
-            // var queryURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
-            $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
-        .then(function(response) {
-          var results = response.data;
 
-        //   for (var i = 0; i < results.length; i++) {
-        //     var foodDiv = $("#nutrition-area");
-
-        //     var nutrients = results[i].nutrients;
-
-        //     var p = $("<p>").text("Nutrients: " + nutrients);
-
-        //     // var personImage = $("<img>");
-        //     // personImage.attr("src", results[i].images.fixed_height.url);
-
-        //     foodDiv.prepend(p);
-        //     // gifDiv.prepend(personImage);
-
-            // $("#nutrition-area").prepend(foodDiv);
-            console.log(response);
-        // }
-        });
-    });
-        </script>
+        <!-- link logic javascript -->
+        <script src="assets/javascript/logic.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </body>
 
 
