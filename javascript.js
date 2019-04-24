@@ -7,10 +7,18 @@ method: "GET",
 dataType: "json",
 url: nurSearchURL,
 success: function (response) {
-    console.log(response);
-    console.log(response.list.item[0,3]);
+    // console.log(response);
+    console.log(response.list.item[0].ndbno);
 
 
+//     findNutrients();
+
+
+// function fundNutrients() {
+//     var nutrientId = "";
+//     var nutrientsAPI = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + nutrientId + "&type=f&format=json&api_key=" + api_Key;
+// }
+  
 }
 
 
@@ -18,13 +26,10 @@ success: function (response) {
 
 
 
-// findNutrients();
 
 
-// function fundNutrients() {
-//     var nutrientId = "";
-//     var nutrientsAPI = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + nutrientId + "&type=f&format=json&api_key=" + api_Key;
-// }
+
+
 
 
 
