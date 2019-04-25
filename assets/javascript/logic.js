@@ -1,5 +1,15 @@
+$("#food-input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        updateAll();
+    }
+});
+
 
 $("#food-search").on("click", function() {
+    updateAll();
+});
+
+function updateAll() {
     var food = $("#food-input").val().trim();
 
     $("#recipe-area").html("<h4 class = 'text-center'>Recipe</h4>");
@@ -66,6 +76,9 @@ $("#food-search").on("click", function() {
                         } else if (myRecipe.includes("é") || myRecipe.includes("à") ) {
                             x++;
                             findRecipe();
+                        } else if (myRecipe.includes("Instructions")) {
+                            x++;
+                            findRecipe();
                         } else if (myRecipe === "") {
                             x++;
                             findRecipe();
@@ -110,6 +123,6 @@ $("#food-search").on("click", function() {
           );
     };
     
-});
+}
 
 
