@@ -11,52 +11,36 @@ success: function (response) {
     console.log(response.list.item[0].ndbno);
 
 
-//     findNutrients();
+    findNutrients();
 
 
-// function fundNutrients() {
-//     var nutrientId = "";
-//     var nutrientsAPI = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + nutrientId + "&type=f&format=json&api_key=" + api_Key;
-// }
-  
+function findNutrients() {
+    var nutrientId = response.list.item[0].ndbno;
+    var nutrientsAPI = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + nutrientId + "&type=f&format=json&api_key=" + api_Key;
+   
+
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        url: nutrientsAPI,
+        success: function (nutrients) {
+    //         console.log(reports.food.nutrients);
+            console.log(nutrients);
+
+            $("#nutrition-area").text(nutrients);
+        }
+        
+    });
+
 }
+}
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-// })
-// .then(function(response) {
-// //   var results = response.data;
-
-//     // if ($("#food-input") === )
-
-
-// //   for (var i = 0; i < results.length; i++) {
-// //     var foodDiv = $("#nutrition-area");
-
-//     // var nutrients = results[i].nutrients;
-
-// //     var p = $("<p>").text("Nutrients: " + nutrients);
-
-// // //     // var personImage = $("<img>");
-// // //     // personImage.attr("src", results[i].images.fixed_height.url);
-
-// //     foodDiv.prepend(p);
-// //     // gifDiv.prepend(personImage);
-
-    // $("#nutrition-area").prepend(response);
-    
-},
-console.log(food),
+})
+// }
+// console.log(food),
 // console.log(response),
-)});
+    
+// }
+// })
 // });
