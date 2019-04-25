@@ -1,7 +1,9 @@
 
 $("#food-search").on("click", function() {
     var food = $("#food-input").val().trim();
-    console.log (food)
+
+    $("#recipe-area").html("<h4 class = 'text-center'>Recipe</h4>");
+    $("#ingredients-area").html("<h4 class = 'text-center'>Ingredients</h4>");
 
     var queryURL = "https://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
     // var queryURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
@@ -26,7 +28,7 @@ $("#food-search").on("click", function() {
         //     // gifDiv.prepend(personImage);
 
             // $("#nutrition-area").prepend(foodDiv);
-            console.log(response);
+            // console.log(response);
         // }
     });
 
@@ -39,16 +41,13 @@ $("#food-search").on("click", function() {
         cache: false,
         url: searchURL,
         success: function (res) {
-            console.log(res);
             
-            var hasInstruction = false;
             var x=0;
             var myRecipe = ""
 
             findRecipe();
 
             function findRecipe() {
-                console.log ("called findrecipe")
                 var recipeId = res.Results[x].RecipeID;
                 var recipeURL = "https://api.bigoven.com/recipe/" + recipeId + "?api_key=" + apiKey;
                 $.ajax({
@@ -57,7 +56,6 @@ $("#food-search").on("click", function() {
                     cache: false,
                     url: recipeURL,
                     success: function (rec) {
-                        console.log(rec);
                         myRecipe = rec.Instructions
                         if (myRecipe.includes("See above")) {
                             x++;
@@ -65,13 +63,18 @@ $("#food-search").on("click", function() {
                         } else if (myRecipe.includes("Instructions are at")) {
                             x++;
                             findRecipe();
+                        } else if (myRecipe.includes("é") || myRecipe.includes("à") ) {
+                            x++;
+                            findRecipe();
                         } else if (myRecipe === "") {
                             x++;
                             findRecipe();
                         } else {
+                            for (var y = 0; y < rec.Ingredients.length; y++) {
+                                $("#ingredients-area").append("<br>" + rec.Ingredients[y].Quantity + " " + rec.Ingredients[y].Unit + " " + rec.Ingredients[y].Name)
+                            }
+                            $("#recipe-area").append(myRecipe);
                             $("#recipe-area").text(myRecipe);
-                            console.log(x)
-
                         }
                     }
                 });
@@ -107,6 +110,6 @@ $("#food-search").on("click", function() {
           );
     };
     
-    });
+});
 
 
