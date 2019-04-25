@@ -74,7 +74,7 @@ $("#food-search").on("click", function() {
                                 $("#ingredients-area").append("<br>" + rec.Ingredients[y].Quantity + " " + rec.Ingredients[y].Unit + " " + rec.Ingredients[y].Name)
                             }
                             $("#recipe-area").append(myRecipe);
-                            $("#recipe-area").text(myRecipe);
+                            $("#recipe-area").append(myRecipe);
                         }
                     }
                 });
