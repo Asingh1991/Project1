@@ -1,3 +1,4 @@
+
 $("#food-search").on("click", function() {
     var food = $("#food-input").val().trim();
     console.log (food)
@@ -56,6 +57,7 @@ $("#food-search").on("click", function() {
                     cache: false,
                     url: recipeURL,
                     success: function (rec) {
+                        console.log(rec);
                         myRecipe = rec.Instructions
                         if (myRecipe.includes("See above")) {
                             x++;
@@ -69,6 +71,7 @@ $("#food-search").on("click", function() {
                         } else {
                             $("#recipe-area").text(myRecipe);
                             console.log(x)
+
                         }
                     }
                 });
@@ -76,6 +79,34 @@ $("#food-search").on("click", function() {
             
         }
     });
+    var youtubekey = "AIzaSyAtSGVtAdUV7TGOoO2KZhAdSMIFmrrduTU";
+    var q = food;
+    var youtubeURL = "https://www.googleapis.com/youtube/v3/search";
+    
+    var options = {
+        part: 'snippet',
+        key: youtubekey,
+        maxResults: 1,
+        q: 'how to make best' + q
+    }
+    console.log(q);
+    loadVids ();
+    
+    function loadVids () {
+        $.getJSON(youtubeURL, options, function(info){
+        console.log(info);
+        var id = info.items[0].id.videoId;
+        mainVid(id);
+    });
+    }
+    function mainVid(id) {
+        $('#video-area').html(`
+          <iframe width="400" height="200"
+          src="https://www.youtube.com/embed/${id}" 
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+          );
+    };
+    
+    });
 
-});
 

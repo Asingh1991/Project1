@@ -15,33 +15,36 @@
         <!-- link bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <!-- link css style sheet -->
+        <link rel="stylesheet" href="assets/css/style.css">
+
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"> -->
     </head>
-    <body>
-        <div class="container">
+    <body >
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-10 text-center" id="page-header">
+                <div class="col-10 text-center d-inline p-2 bg-primary text-white" id="page-header">
                     <h1>All about foods</h1>
                 </div>
                 <div class="col-1"></div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <br>
             <br>
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-5 text-center" id="search-area">
+                <div class="col-5 text-center d-inline p-2 bg-primary text-white" id="search-area">
                     <div class="form-group">
                         <label for="topic-input">Enter a food:</label>
                         <input class="form-control" id="food-input" type="text">
                     </div>
                     <button class="btn btn-secondary" id="food-search" type="submit">Ready!!</button>
                 </div>
-                <div class="col-5 text-center" id="recipe-area">
+                <div class="col-1"></div>
+                <div class="col-4 text-center d-inline p-2 bg-primary text-white" id="recipe-area">
     
-                    
+                    Recipe goes here
     
                 </div>
                 <div class="col-1"></div>
@@ -50,10 +53,29 @@
             <br>
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-5 text-center" id="nutrition-area">
+                <div class="col-5 text-center d-inline p-2 bg-primary text-white" id="nutrition-area">
                     Nutrition Facts go here
+                    <table class="table table-striped table-bordered table-sm table-hover">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Total Kcal</th>
+                            <th scope="col">Protein (g)</th>
+                            <th scope="col">Carbohydrates (g)</th>
+                            <th scope="col">Fat (g)</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-sm">
+                          <tr>
+                            <td scope="row">250</td>
+                            <td>7</td>
+                            <td>35</td>
+                            <td>7</td>
+                          </tr>
+                        </tbody>
+                      </table>
                 </div>
-                <div class="col-5 text-center" id="video-area">
+                <div class="col-1"></div>
+                <div class="col-4 text-center d-inline p-2 bg-primary text-white" id="video-area">
     
                     Video goes here
     
@@ -64,8 +86,28 @@
             <br>
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-10 text-center" id="results-area">
+                <div class="col-10 text-center d-inline p-2 bg-primary text-white" id="results-area">
                     Recent Search Results go here
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Food</th>
+                            <th scope="col">Total Kcal</th>
+                            <th scope="col">Protein (g)</th>
+                            <th scope="col">Carbohydrates (g)</th>
+                            <th scope="col">Fat (g)</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-sm">
+                          <tr>
+                            <td scope="row">Brownie</td>
+                            <td>250</td>
+                            <td>7</td>
+                            <td>35</td>
+                            <td>7</td>
+                          </tr>
+                        </tbody>
+                      </table>
                 </div>
                 <div class="col-1"></div>
             </div>
