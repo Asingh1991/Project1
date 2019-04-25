@@ -1,10 +1,9 @@
 
 $("#food-search").on("click", function() {
     var food = $("#food-input").val().trim();
+
     $("#recipe-area").html("<h4 class = 'text-center'>Recipe</h4>");
     $("#ingredients-area").html("<h4 class = 'text-center'>Ingredients</h4>");
-    
-    // console.log (food)
 
     var queryURL = "https://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
     // var queryURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
@@ -42,7 +41,7 @@ $("#food-search").on("click", function() {
         cache: false,
         url: searchURL,
         success: function (res) {
-           
+            
             var x=0;
             var myRecipe = ""
 
@@ -75,6 +74,7 @@ $("#food-search").on("click", function() {
                                 $("#ingredients-area").append("<br>" + rec.Ingredients[y].Quantity + " " + rec.Ingredients[y].Unit + " " + rec.Ingredients[y].Name)
                             }
                             $("#recipe-area").append(myRecipe);
+                            $("#recipe-area").text(myRecipe);
                         }
                     }
                 });
@@ -92,10 +92,12 @@ $("#food-search").on("click", function() {
         maxResults: 1,
         q: 'how to make best' + q
     }
+    console.log(q);
     loadVids ();
     
     function loadVids () {
         $.getJSON(youtubeURL, options, function(info){
+        console.log(info);
         var id = info.items[0].id.videoId;
         mainVid(id);
     });
