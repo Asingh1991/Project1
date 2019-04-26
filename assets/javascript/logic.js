@@ -1,7 +1,29 @@
+
+$("#food-input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        updateAll();
+    }
+});
+
+
+
 $("#food-search").on("click", function() {
+    updateAll();
+});
+
+function updateAll() {
     var food = $("#food-input").val().trim();
+
     var api_Key = "dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
     var nurSearchURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=" + api_Key;
+
+
+    $("#recipe-area").html("<h4 class = 'text-center'>Recipe</h4>");
+    $("#ingredients-area").html("<h4 class = 'text-center'>Ingredients</h4>");
+
+    var queryURL = "https://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
+    // var queryURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
+
     $.ajax({
 method: "GET",
 dataType: "json",
@@ -43,6 +65,7 @@ function findNutrients() {
             var fat = nutrientFact[2].value;
             console.log(fat);
 
+
             var newRow = $("#nutrition-data").append(
                 $("<td>").text(totalKcal),
                 $("<td>").text(protein),
@@ -55,6 +78,7 @@ function findNutrients() {
             
         }
         
+
     });
 
 }
@@ -73,16 +97,13 @@ function findNutrients() {
         cache: false,
         url: searchURL,
         success: function (res) {
-            console.log(res);
             
-            var hasInstruction = false;
             var x=0;
             var myRecipe = ""
 
             findRecipe();
 
             function findRecipe() {
-                console.log ("called findrecipe")
                 var recipeId = res.Results[x].RecipeID;
                 var recipeURL = "https://api.bigoven.com/recipe/" + recipeId + "?api_key=" + apiKey;
                 $.ajax({
@@ -91,7 +112,6 @@ function findNutrients() {
                     cache: false,
                     url: recipeURL,
                     success: function (rec) {
-                        console.log(rec);
                         myRecipe = rec.Instructions
                         if (myRecipe.includes("See above")) {
                             x++;
@@ -99,13 +119,21 @@ function findNutrients() {
                         } else if (myRecipe.includes("Instructions are at")) {
                             x++;
                             findRecipe();
+                        } else if (myRecipe.includes("é") || myRecipe.includes("à") ) {
+                            x++;
+                            findRecipe();
+                        } else if (myRecipe.includes("Instructions")) {
+                            x++;
+                            findRecipe();
                         } else if (myRecipe === "") {
                             x++;
                             findRecipe();
                         } else {
-                            $("#recipe-area").text(myRecipe);
-                            console.log(x)
-
+                            for (var y = 0; y < rec.Ingredients.length; y++) {
+                                $("#ingredients-area").append("<br>" + rec.Ingredients[y].Quantity + " " + rec.Ingredients[y].Unit + " " + rec.Ingredients[y].Name)
+                            }
+                            $("#recipe-area").append(myRecipe);
+                            $("#recipe-area").append(myRecipe);
                         }
                     }
                 });
@@ -141,6 +169,6 @@ function findNutrients() {
           );
     };
     
-    });
+}
 
 
