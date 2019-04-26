@@ -94,7 +94,58 @@ function findNutrients() {
             );
                 $("#nutriton-area").append(newRow);
             
+                var youtubekey = "AIzaSyAd1UZxzbwiLCyOwLYGrkdOxpT5_Euj5h0";
+                var q = food;
+                var youtubeURL = "https://www.googleapis.com/youtube/v3/search";
+                
+                var options = {
+                    part: 'snippet',
+                    key: youtubekey,
+                    maxResults: 1,
+                    q: 'how to make best' + q
+                }
+                console.log(q);
+                loadVids ();
+                
+                function loadVids () {
+                    $.getJSON(youtubeURL, options, function(info){
+                    console.log(info);
+                    var id = info.items[0].id.videoId;
+                    mainVid(id);
+                });
+                }
+                function mainVid(id) {
+                    $('#video-area').html(`
+                      <iframe width="400" height="200"
+                      src="https://www.youtube.com/embed/${id}" 
+                      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+                      );
             
+                      var firesbaseurl = "https://www.youtube.com/watch?v="+id;
+            
+                      $("#food-input").val("");
+            
+                      
+                  
+                      database.ref().push({
+                          totalKcal: totalKcal,
+                          protein: protein,
+                          carbohydrates: carbohydrates,
+                          fat: fat,
+                          name: food,
+                          firebaseurl: firesbaseurl
+                      });
+                      
+                      database.ref().on("child_added", function(snapshot) {
+                      var name = snapshot.val().name;
+                      var calories = snapshot.val().totalKcal;
+                      var protein = snapshot.val().protein;
+                      var carbs = snapshot.val().carbohydrates;
+                      var fat = snapshot.val().fat;
+                      var video = snapshot.val().firebaseurl;
+                      $("#results-area").prepend("<tr><td>" + name + "</td><td> "+ calories + "</td><td> "+ protein +"</td><td> "+carbs+"</td><td> "+fat+"</td><td><a href=" + video + ">"+ video +"</a></td>");
+                    });
+                };
         }
         
 
@@ -160,49 +211,5 @@ function findNutrients() {
             
         }
     });
-    var youtubekey = "AIzaSyAd1UZxzbwiLCyOwLYGrkdOxpT5_Euj5h0";
-    var q = food;
-    var youtubeURL = "https://www.googleapis.com/youtube/v3/search";
-    
-    var options = {
-        part: 'snippet',
-        key: youtubekey,
-        maxResults: 1,
-        q: 'how to make best' + q
-    }
-    console.log(q);
-    loadVids ();
-    
-    function loadVids () {
-        $.getJSON(youtubeURL, options, function(info){
-        console.log(info);
-        var id = info.items[0].id.videoId;
-        mainVid(id);
-    });
-    }
-    function mainVid(id) {
-        $('#video-area').html(`
-          <iframe width="400" height="200"
-          src="https://www.youtube.com/embed/${id}" 
-          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
-          );
-
-          var firesbaseurl = "https://www.youtube.com/watch?v="+id;
-
-          $("#food-input").val("");
-          
-      
-          database.ref().push({
-              name: food,
-              firebaseurl: firesbaseurl
-          });
-          
-          database.ref().on("child_added", function(snapshot) {
-          var name = snapshot.val().name;
-          var video = snapshot.val().firebaseurl;
-          $("#results-area").prepend("<tr><td>" + name + "</td><td><a href=" + video + ">"+ video +"</a></td><td>" );
-  
-        });
-    };
     
 };
