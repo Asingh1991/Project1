@@ -16,8 +16,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <!-- link css style sheet -->
         <link rel="stylesheet" href="assets/css/style.css">
-
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"> -->
+        <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+        <!--Firebase-->
     </head>
     <body >
         <div class="container-fluid">
@@ -106,35 +107,27 @@
             <br>
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-10 text-center d-inline p-2 bg-primary text-white" id="results-area">
+                <div class="col-10 text-center d-inline p-2 bg-primary text-white">
 
                     <h4>Recent Search Results</h4>
 
                     <table class="table table-striped table-bordered">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Food</th>
-                            <th scope="col">Total Kcal</th>
-                            <th scope="col">Protein (g)</th>
-                            <th scope="col">Carbohydrates (g)</th>
-                            <th scope="col">Fat (g)</th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-sm">
-                          <tr>
-                            <td scope="row">Brownie</td>
-                            <td>250</td>
-                            <td>7</td>
-                            <td>35</td>
-                            <td>7</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="col-1"></div>
-            </div>
-        </div>
-
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Food</th>
+                          <th scope="col">Total Kcal</th>
+                          <th scope="col">Protein (g)</th>
+                          <th scope="col">Carbohydrates (g)</th>
+                          <th scope="col">Fat (g)</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-sm" id="results-area"></tbody>
+                    </table>
+              </div>
+              <div class="col-1"></div>
+          </div>
+      </div>
+      
     
     <script type="text/javascript" src= "javascript.js">
        
