@@ -26,8 +26,12 @@ $("#food-search").on("click", function() {
 
 function updateAll() {
     var food = $("#food-input").val().trim();
+
+    $("#nutrition-data").empty();
+
     $("#food-input").val("");
     $("#results-area").empty();
+
 
     var api_Key = "dD7Pf7jRvGjQ4wdtk47L2KISBlUnbLbzUBVEeqkn";
     var nurSearchURL = " https://api.nal.usda.gov/ndb/search/?format=json&q=" + food + "&sort=n&max=5&offset=0&api_key=" + api_Key;
@@ -62,7 +66,7 @@ function findNutrients() {
         url: nutrientsAPI,
         success: function (nutrients) {
     //         console.log(reports.food.nutrients);
-            console.log("nutrients=" + nutrients);
+            // console.log("nutrients=" + nutrients);
           
             var nutrientFact = nutrients.report.food.nutrients;
             // $("#nutrition-area").append(nutrientFact);
