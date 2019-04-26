@@ -25,7 +25,7 @@ function findNutrients() {
         url: nutrientsAPI,
         success: function (nutrients) {
     //         console.log(reports.food.nutrients);
-            console.log("nutrients=" + nutrients);
+            // console.log("nutrients=" + nutrients);
           
             var nutrientFact = nutrients.report.food.nutrients;
             // $("#nutrition-area").append(nutrientFact);
