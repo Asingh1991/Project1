@@ -1,3 +1,15 @@
+var config = {
+    apiKey: "AIzaSyCTc1mIcuSu43Y0xiPQ5xP6DMFPZVXMDBI",
+    authDomain: "project1-da1bb.firebaseapp.com",
+    databaseURL: "https://project1-da1bb.firebaseio.com",
+    projectId: "project1-da1bb",
+    storageBucket: "project1-da1bb.appspot.com",
+    messagingSenderId: "296689117084"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
 $("#food-input").on('keyup', function (e) {
     if (e.keyCode == 13) {
         updateAll();
@@ -11,6 +23,8 @@ $("#food-search").on("click", function() {
 
 function updateAll() {
     var food = $("#food-input").val().trim();
+    $("#food-input").val("");
+    $("#results-area").empty();
 
     $("#recipe-area").html("<h4 class = 'text-center'>Recipe</h4>");
     $("#ingredients-area").html("<h4 class = 'text-center'>Ingredients</h4>");
@@ -95,7 +109,7 @@ function updateAll() {
             
         }
     });
-    var youtubekey = "AIzaSyAtSGVtAdUV7TGOoO2KZhAdSMIFmrrduTU";
+    var youtubekey = "AIzaSyAd1UZxzbwiLCyOwLYGrkdOxpT5_Euj5h0";
     var q = food;
     var youtubeURL = "https://www.googleapis.com/youtube/v3/search";
     
@@ -121,8 +135,23 @@ function updateAll() {
           src="https://www.youtube.com/embed/${id}" 
           frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
           );
+
+          var firesbaseurl = "https://www.youtube.com/watch?v="+id;
+
+          $("#food-input").val("");
+          
+      
+          database.ref().push({
+              name: food,
+              firebaseurl: firesbaseurl
+          });
+          
+          database.ref().on("child_added", function(snapshot) {
+          var name = snapshot.val().name;
+          var video = snapshot.val().firebaseurl;
+          $("#results-area").prepend("<tr><td>" + name + "</td><td><a href=" + video + ">"+ video +"</a></td><td>" );
+  
+        });
     };
     
-}
-
-
+};
