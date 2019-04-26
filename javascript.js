@@ -25,9 +25,34 @@ function findNutrients() {
         url: nutrientsAPI,
         success: function (nutrients) {
     //         console.log(reports.food.nutrients);
-            console.log(nutrients);
+            console.log("nutrients=" + nutrients);
+          
+            var nutrientFact = nutrients.report.food.nutrients;
+            // $("#nutrition-area").append(nutrientFact);
+            console.log(nutrientFact);
 
-            $("#nutrition-area").text(nutrients);
+            var totalKcal = nutrientFact[0].value;
+            console.log(totalKcal);
+
+            var protein = nutrientFact[1].value;
+            console.log(protein);
+
+            var carbohydrates = nutrientFact[3].value;
+            console.log(carbohydrates);
+
+            var fat = nutrientFact[2].value;
+            console.log(fat);
+
+            var newRow = $("#nutrition-data").append(
+                $("<td>").text(totalKcal),
+                $("<td>").text(protein),
+                $("<td>").text(carbohydrates),
+                $("<td>").text(fat),
+               
+            );
+                $("#nutriton-area").append(newRow);
+            
+            
         }
         
     });
