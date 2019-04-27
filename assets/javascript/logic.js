@@ -143,7 +143,7 @@ function findNutrients() {
                       var carbs = snapshot.val().carbohydrates;
                       var fat = snapshot.val().fat;
                       var video = snapshot.val().firebaseurl;
-                      $("#results-area").prepend("<tr><td>" + name + "</td><td> "+ calories + "</td><td> "+ protein +"</td><td> "+carbs+"</td><td> "+fat+"</td><td><a href=" + video + ">"+ video +"</a></td>");
+                      $("#results-area").prepend("<tr><td bgcolor=white>" + name + "</td><td bgcolor=white> "+ calories + "</td><td bgcolor=white> "+ protein +"</td><td bgcolor=white> "+carbs+"</td><td bgcolor=white> "+fat+"</td><td bgcolor=white><a href=" + video + ">"+ video +"</a></td>");
                     });
                 };
         }
